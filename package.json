@@ -3,7 +3,21 @@
   "version": "0.0.1",
   "description": "Simple starter package for Redux with React and Babel support",
   "main": "index.js",
-  "repository": "git@github.com:Gennon/Cowabunga.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gennon/Cowabunga.git"
+  },
+  "keywords": [
+    "project",
+    "idea",
+    "organize"
+  ],
+  "author": "Gennon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gennon/Cowabunga/issues"
+  },
+  "homepage": "https://github.com/Gennon/Cowabunga#readme",
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "test": "mocha test/**/test*.js --compilers js:babel-core/register --recursive",
