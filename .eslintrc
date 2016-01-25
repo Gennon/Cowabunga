@@ -1,0 +1,35 @@
+{
+    "rules": {
+        "indent": [
+            2,
+            4
+        ],
+        "quotes": [
+            1,
+            "single"
+        ],
+        "linebreak-style": [
+            1,
+            "windows"
+        ],
+        "semi": [
+            1,
+            "always"
+        ]
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true,
+        "mocha": true
+    },
+    "extends": "eslint:recommended",
+    "ecmaFeatures": {
+        "jsx": true,
+        "experimentalObjectRestSpread": true,
+        "modules": true
+    },
+    "plugins": [
+        "react"
+    ]
+}
