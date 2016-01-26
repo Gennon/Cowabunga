@@ -9,7 +9,7 @@
             "single"
         ],
         "linebreak-style": [
-            1,
+            0,
             "windows"
         ],
         "semi": [

@@ -8,17 +8,17 @@ var TestUtils = require('react-addons-test-utils');
 
 describe('Testing App Component', function() {
     jsdom({ skipWindowCheck: true });
-
-    it('should contain text: Cowabunga!', function() {
+    
+    before('Render component', function(){
         var App = require('../../src/components/app.jsx').default;
-
-        var myDiv = TestUtils.renderIntoDocument(
+        this.app = App;
+        this.rendered = TestUtils.renderIntoDocument(
             <App />
         );
+    });
 
-        var headerText = TestUtils.findRenderedDOMComponentWithTag(
-            myDiv, 'h1');
-
+    it('should contain text: Cowabunga!', function() {
+        var headerText = TestUtils.findRenderedDOMComponentWithTag(this.rendered, 'h1');
         assert.equal(headerText.textContent, 'Cowabunga!');
     });
 });
