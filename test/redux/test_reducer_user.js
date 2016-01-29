@@ -9,17 +9,16 @@ describe('Testing user reducer', () => {
     expect(reducer(undefined, {})).to.deep.equal({ user: null });
   });
   
-  xit('should handle LOG_IN', () => {
-    return expext.pass();
-    
+  it('should handle LOG_IN', () => {
     const initialState = { user: null };
     
     const nextState = { 
-      user: { id: 1 }
+      user: { username: 'John', id: 1 }
     };
     
     const action = {
-      type: actions.LOG_IN
+      type: actions.LOG_IN,
+      payload: { data: { username:'John', id: 1}}
     };
     
     expect(reducer(initialState, action)).to.deep.equal(nextState);

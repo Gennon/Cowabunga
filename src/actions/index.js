@@ -8,10 +8,10 @@ export const FETCH_ALL_ITEMS = 'FETCH_ALL_ITEMS';
 export const FETCH_OWN_ITEMS = 'FETCH_OWN_ITEMS';
 export const APPROVE_ITEM = 'APPROVE_ITEM';
 
-export const ROOT_URL = 'https://localhost:9090/api/';
+export const ROOT_URL = 'http://localhost:9090/api';
 
-export function logIn(user_id) {
-  const request = axios.post(`${ROOT_URL}/login`, {id: user_id});
+export function logIn(user) {
+  const request = axios.post(`${ROOT_URL}/login`, { auth: user });
 
   return {
     type: LOG_IN,
