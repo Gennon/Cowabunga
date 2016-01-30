@@ -1,0 +1,82 @@
+import { expect } from 'chai';
+import reducer from '../../src/reducers/reducer_items';
+import * as actions from '../../src/actions/index';
+
+
+describe('Testing items reducer', () => {
+  
+  it('should return defult state when not using a defined action', () => {
+    expect(reducer(undefined, {})).to.deep.equal({ all: [], current: null });
+  });
+  
+  it('should handle FETCH_ALL_ITEMS', () => {
+    const initialState = { all: [], current: null };
+    
+    const nextState = { 
+      all: [
+        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 },
+        { id: 2, created_by: 2, approved_by: 0, state: 2, type: 2 }
+      ], 
+      current: null
+    };
+    
+    const action = {
+      type: actions.FETCH_ALL_ITEMS,
+      payload: { data: [
+        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 },
+        { id: 2, created_by: 2, approved_by: 0, state: 2, type: 2 }
+      ]}
+    };
+    
+    expect(reducer(initialState, action)).to.deep.equal(nextState);
+  });
+  
+  it('should handle FETCH_OWN_ITEMS', () => {
+    const initialState = { all: [
+        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 },
+        { id: 2, created_by: 2, approved_by: 0, state: 2, type: 2 }
+    ], current: null };
+    
+    const nextState = { 
+      all: [
+        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 }
+      ], 
+      current: null
+    };
+    
+    const action = {
+      type: actions.FETCH_OWN_ITEMS,
+      payload: { data: [
+        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 }
+      ]}
+    };
+    
+    expect(reducer(initialState, action)).to.deep.equal(nextState);
+  });
+  
+  
+  it('should handle FETCH_ITEM', () => {
+    const initialState = { all: [
+        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 },
+        { id: 2, created_by: 2, approved_by: 0, state: 2, type: 2 }
+    ], current: null };
+    
+    const nextState = { 
+      all: [
+        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 },
+        { id: 2, created_by: 2, approved_by: 0, state: 2, type: 2 }
+      ], 
+      current: { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 }
+    };
+    
+    const action = {
+      type: actions.FETCH_ITEM,
+      payload: { data: 
+        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 }
+      }
+    };
+    
+    expect(reducer(initialState, action)).to.deep.equal(nextState);
+  });
+  
+});
