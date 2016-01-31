@@ -79,4 +79,40 @@ describe('Testing items reducer', () => {
     expect(reducer(initialState, action)).to.deep.equal(nextState);
   });
   
+  it('should handle APPROVE_ITEM', () => {
+    const initialState = { all: [], current: { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 } };
+    
+    const nextState = { 
+      all: [], 
+      current: { id: 1, created_by: 1, approved_by: 2, state: 2, type: 1 }
+    };
+    
+    const action = {
+      type: actions.APPROVE_ITEM,
+      payload: { data: 
+        { id: 1, created_by: 1, approved_by: 2, state: 2, type: 1 }
+      }
+    };
+    
+    expect(reducer(initialState, action)).to.deep.equal(nextState);
+  });
+  
+  it('should handle ORDER_ITEM', () => {
+    const initialState = { all: [], current: null };
+    
+    const nextState = { 
+      all: [], 
+      current: { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 }
+    };
+    
+    const action = {
+      type: actions.ORDER_ITEM,
+      payload: { data: 
+        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 }
+      }
+    };
+    
+    expect(reducer(initialState, action)).to.deep.equal(nextState);
+  });
+  
 });
