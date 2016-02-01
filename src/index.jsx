@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { Col } from 'react-bootstrap';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import noLocaleData from 'react-intl/lib/locale-data/no';
+import NavBar from './components/navbar';
 
 import App from './components/app';
 import configureStore from './store/configure-store';
@@ -14,17 +15,14 @@ const store = configureStore();
 addLocaleData(noLocaleData);
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Col md={12}>
-            <Col md={8}>
-                <IntlProvider locale="no" messages={noMessages}>
-                    <App />
-                </IntlProvider>
-            </Col>
-            <Col md={4}>
-                <DevTools />
-            </Col>
-        </Col>
-    </Provider>
-    , document.querySelector('#container')
+  <Provider store={store}>
+    <IntlProvider locale="no" messages={noMessages}>
+      <div className="container">
+        <NavBar />
+        <App />
+        <DevTools />
+      </div>
+    </IntlProvider>
+  </Provider>
+  , document.querySelector('#container')
 );
