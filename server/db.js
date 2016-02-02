@@ -9,7 +9,12 @@ function init(db_file){
     db.open(db_file);
     database = db.database();
   
-    database.run('CREATE TABLE IF NOT EXISTS users(_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)', (error) => {
+    database.run('CREATE TABLE IF NOT EXISTS users(' +
+      '_id INTEGER PRIMARY KEY AUTOINCREMENT, ' +
+      'username TEXT, ' + 
+      'password TEXT, ' +
+      'role INTEGER DEFAULT 0)', 
+    (error) => {
       if(error) reject(error);
       else fulfill(db);
     });

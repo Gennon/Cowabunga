@@ -11,7 +11,7 @@ export const APPROVE_ITEM = 'APPROVE_ITEM';
 export const ROOT_URL = 'http://localhost:9090/api';
 
 export function logIn(user) {
-  const request = axios.post(`${ROOT_URL}/login`, { auth: user });
+  const request = axios.post(`${ROOT_URL}/login`, null ,{ auth: user });
 
   return {
     type: LOG_IN,

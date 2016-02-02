@@ -41,7 +41,9 @@ class NavBar extends Component {
   }
   
   loginUser(){
-    this.props.logIn({username: 'John', password: '12345'});
+    this.props.logIn({username: 'John', password: '12345'})
+    .then((data) => console.log(data))
+    .catch(console.log('error'));
   }
   
   loginApprover(){
@@ -51,7 +53,7 @@ class NavBar extends Component {
 }
 
 function mapStateToProps(state) {
-  return { loggedIn: state.user !== null };
+  return { loggedIn: state.user.current !== null && typeof(state.user.current) !== 'undefined' };
 }
 
 export default connect(mapStateToProps, { logIn })(NavBar);

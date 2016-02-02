@@ -90,7 +90,10 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
   app.db.init('./storage.sqlite')
-    .then(debug('Database initialized'));
+    .then(debug('Database initialized'))
+    .then(app.db.addUser({_id: 1, username: 'John', password: '12345', role: 0}))
+    .then(app.db.addUser({_id: 2, username: 'Jane', password: '12345', role: 1}))
+    .then(debug('Initial users added'));
 }
 
 
