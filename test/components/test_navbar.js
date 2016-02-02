@@ -70,17 +70,18 @@ describe('Testing NavBar Component', function() {
     
     describe('Dropdown tests', function(){
       
-      before('Render and simulate click', function(){
+      before('Render', function(){
         var NavBar = require('../../src/components/navbar.jsx').TestNavBar;
         this.navbar = NavBar;
         this.rendered = TestUtils.renderIntoDocument(
           <NavBar />
         );
         this.links = TestUtils.scryRenderedDOMComponentsWithTag(this.rendered, 'a');
-        TestUtils.Simulate.click(this.links[1]);
       });
       
-      it('should show a dropdown when login is clicked', function() {
+      it('should have a dropdown with two links', function() {
+        var items = TestUtils.scryRenderedDOMComponentsWithClass(this.rendered, 'dropdown');
+        assert.isAbove(items.length, 0);
         assert.lengthOf(this.links, 4);
       });
       

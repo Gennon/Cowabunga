@@ -4,12 +4,10 @@ import { Provider } from 'react-redux';
 import { Col } from 'react-bootstrap';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import noLocaleData from 'react-intl/lib/locale-data/no';
-import NavBar from './components/navbar';
-
-import App from './components/app';
 import configureStore from './store/configure-store';
-import DevTools from './containers/dev-tools';
 import noMessages from './intl/no';
+import { Router, browserHistory } from 'react-router';
+import routes from './routes';
 
 const store = configureStore();
 addLocaleData(noLocaleData);
@@ -17,11 +15,7 @@ addLocaleData(noLocaleData);
 ReactDOM.render(
   <Provider store={store}>
     <IntlProvider locale="no" messages={noMessages}>
-      <div className="container">
-        <NavBar />
-        <App />
-        <DevTools />
-      </div>
+      <Router history={browserHistory} routes={routes} />
     </IntlProvider>
   </Provider>
   , document.querySelector('#container')
