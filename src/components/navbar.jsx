@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { logIn } from '../actions/index';
+import { logIn, logOut } from '../actions/index';
 import { Glyphicon, Nav, Navbar, NavItem, NavDropdown} from 'react-bootstrap';
  
 class NavBar extends Component {
@@ -10,7 +10,7 @@ class NavBar extends Component {
       <Nav pullRight>
         <NavItem eventKey={1} href="#"><Glyphicon glyph="bell" /> Info</NavItem>
         <NavItem eventKey={2} href="#"><Glyphicon glyph="user" /> Profile</NavItem>
-        <NavItem eventKey={3} href="#"><Glyphicon glyph="log-out" /> Logout</NavItem>
+        <NavItem eventKey={3} onClick={this.props.logOut}><Glyphicon glyph="log-out" /> Logout</NavItem>
       </Nav>
     );
   }
@@ -41,13 +41,11 @@ class NavBar extends Component {
   }
   
   loginUser(){
-    this.props.logIn({username: 'John', password: '12345'})
-    .then((data) => console.log(data))
-    .catch(console.log('error'));
+    this.props.logIn({username: 'John', password: '12345'});
   }
   
   loginApprover(){
-    this.props.logIn({username: 'John', password: '12345'});
+    this.props.logIn({username: 'Jane', password: '12345'});
   }
   
 }
@@ -56,5 +54,5 @@ function mapStateToProps(state) {
   return { loggedIn: state.user.current !== null && typeof(state.user.current) !== 'undefined' };
 }
 
-export default connect(mapStateToProps, { logIn })(NavBar);
+export default connect(mapStateToProps, { logIn, logOut })(NavBar);
 export var TestNavBar = NavBar;
