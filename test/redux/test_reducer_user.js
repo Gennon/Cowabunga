@@ -6,14 +6,14 @@ import * as actions from '../../src/actions/index';
 describe('Testing user reducer', () => {
   
   it('should return defult state when not using a defined action', () => {
-    expect(reducer(undefined, {})).to.deep.equal({ user: null });
+    expect(reducer(undefined, {})).to.deep.equal({ current: null });
   });
   
   it('should handle LOG_IN', () => {
-    const initialState = { user: null };
+    const initialState = { current: null };
     
     const nextState = { 
-      user: { username: 'John', id: 1 }
+      current: { username: 'John', id: 1 }
     };
     
     const action = {
@@ -26,10 +26,10 @@ describe('Testing user reducer', () => {
   
   it('should handle LOG_OUT', () => {
       
-    const initialState = { user: { id: 1} };
+    const initialState = { current: { id: 1} };
     
     const nextState = { 
-      user: null
+      current: null
     };
     
     const action = {

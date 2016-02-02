@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { logIn } from '../actions/index';
 import { Glyphicon, Nav, Navbar, NavItem, NavDropdown} from 'react-bootstrap';
  
 class NavBar extends Component {
@@ -17,8 +19,8 @@ class NavBar extends Component {
     return (
       <Nav pullRight>
         <NavDropdown eventKey={1} title="Login" id="collapsible-navbar-dropdown">
-          <NavItem eventKey={1.1} href="#">User</NavItem>
-          <NavItem eventKey={1.2} href="#">Approver</NavItem>
+          <NavItem eventKey={1.1} onClick={() => this.loginUser()}>User</NavItem>
+          <NavItem eventKey={1.2} onClick={() => this.loginApprover()}>Approver</NavItem>
         </NavDropdown>
       </Nav>
     );  
@@ -37,6 +39,20 @@ class NavBar extends Component {
       </Navbar>
     );
   }
+  
+  loginUser(){
+    this.props.logIn({username: 'John', password: '12345'});
+  }
+  
+  loginApprover(){
+    this.props.logIn({username: 'John', password: '12345'});
+  }
+  
 }
 
-export default NavBar;
+function mapStateToProps(state) {
+  return { loggedIn: state.user !== null };
+}
+
+export default connect(mapStateToProps, { logIn })(NavBar);
+export var TestNavBar = NavBar;

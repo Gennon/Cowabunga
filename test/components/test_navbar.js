@@ -1,10 +1,10 @@
 // Mocking window and document object:
 require('./dom-mock')('<html><body></body></html>');
 
-var jsdom = require('mocha-jsdom');
-var assert = require('chai').assert;
-var React = require('react');
-var TestUtils = require('react-addons-test-utils');
+import jsdom from 'mocha-jsdom';
+import { assert } from 'chai';
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 
 describe('Testing NavBar Component', function() {
   jsdom({ skipWindowCheck: true });
@@ -12,7 +12,7 @@ describe('Testing NavBar Component', function() {
   describe('Logged in', function(){
     
     before('Render component', function(){
-      var NavBar = require('../../src/components/navbar.jsx').default;
+      var NavBar = require('../../src/components/navbar.jsx').TestNavBar;
       this.navbar = NavBar;
       this.rendered = TestUtils.renderIntoDocument(
         <NavBar loggedIn />
@@ -50,7 +50,7 @@ describe('Testing NavBar Component', function() {
   describe('Logged out', function(){
      
     before('Render component', function(){
-      var NavBar = require('../../src/components/navbar.jsx').default;
+      var NavBar = require('../../src/components/navbar.jsx').TestNavBar;
       this.navbar = NavBar;
       this.rendered = TestUtils.renderIntoDocument(
         <NavBar />
@@ -71,7 +71,7 @@ describe('Testing NavBar Component', function() {
     describe('Dropdown tests', function(){
       
       before('Render and simulate click', function(){
-        var NavBar = require('../../src/components/navbar.jsx').default;
+        var NavBar = require('../../src/components/navbar.jsx').TestNavBar;
         this.navbar = NavBar;
         this.rendered = TestUtils.renderIntoDocument(
           <NavBar />
