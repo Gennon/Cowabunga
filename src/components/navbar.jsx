@@ -1,16 +1,20 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { logIn, logOut } from '../actions/index';
 import { Glyphicon, Nav, Navbar, NavItem, NavDropdown} from 'react-bootstrap';
+import { Link } from 'react-router';
  
 class NavBar extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  };
     
   renderLoggedIn(){
     return (
       <Nav pullRight>
         <NavItem eventKey={1} href="#"><Glyphicon glyph="bell" /> Info</NavItem>
         <NavItem eventKey={2} href="#"><Glyphicon glyph="user" /> Profile</NavItem>
-        <NavItem eventKey={3} onClick={this.props.logOut}><Glyphicon glyph="log-out" /> Logout</NavItem>
+        <NavItem eventKey={3} onClick={(e) => this.logOut(e)}><Glyphicon glyph="log-out" /> Logout</NavItem>
       </Nav>
     );
   }
@@ -41,11 +45,23 @@ class NavBar extends Component {
   }
   
   loginUser(){
-    this.props.logIn({username: 'John', password: '12345'});
+    this.props.logIn({username: 'John', password: '12345'})
+      .then(() => {
+        this.context.router.push('/home');
+      });
   }
   
   loginApprover(){
-    this.props.logIn({username: 'Jane', password: '12345'});
+    this.props.logIn({username: 'Jane', password: '12345'})
+      .then(() => {
+        this.context.router.push('/home');
+      });
+  }
+  
+  logOut(e){
+    e.preventDefault();
+    this.props.logOut();
+    this.context.router.push('/');
   }
   
 }
