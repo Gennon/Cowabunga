@@ -30,7 +30,7 @@ class Dashboard extends Component {
   renderSidebarItems(){
     return this.props.items.map((item, index) => {
       return (
-        <li onClick={this.props.handleSidebarClick} 
+        <li onClick={() => this.props.handleSidebarClick(index)} 
             className={item.active ? 'active' : ''} 
             key={index}>
           <a>{item.name}</a>

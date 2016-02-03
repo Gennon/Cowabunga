@@ -63,7 +63,6 @@ describe('Testing actions', () => {
     expect(actions.approveItem(user_id, item)).to.deep.equal(expectedAction);
   });
   
-  
   it('should be able to fetch an item', () => {
     const user_id = 1;
     const item_id = 1;
@@ -73,4 +72,13 @@ describe('Testing actions', () => {
     };
     expect(actions.fetchItem(user_id, item_id)).to.deep.equal(expectedAction);
   });
+  
+  it('should be able to show a page', () => {
+    const expectedAction = {
+      type: actions.SHOW_PAGE,
+      payload: { selected: 0 }
+    };
+    expect(actions.showPage(0)).to.deep.equal(expectedAction);
+  });
+  
 });

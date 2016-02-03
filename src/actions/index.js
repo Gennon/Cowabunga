@@ -7,6 +7,7 @@ export const FETCH_ITEM = 'FETCH_ITEM';
 export const FETCH_ALL_ITEMS = 'FETCH_ALL_ITEMS';
 export const FETCH_OWN_ITEMS = 'FETCH_OWN_ITEMS';
 export const APPROVE_ITEM = 'APPROVE_ITEM';
+export const SHOW_PAGE = 'SHOW_PAGE';
 
 export const ROOT_URL = 'http://localhost:9090/api';
 
@@ -68,5 +69,12 @@ export function approveItem(user_id, item) {
   return {
     type: APPROVE_ITEM,
     payload: request
+  };
+}
+
+export function showPage(pageNumber) {
+  return {
+    type: SHOW_PAGE,
+    payload: { selected: pageNumber }
   };
 }
