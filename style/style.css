@@ -4,7 +4,7 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-  padding-top: 0px;
+  padding-top: 50px;
 }
 
 
@@ -104,10 +104,9 @@ body {
   border-radius: 50%;
 }
 
-
 /*
  * Some margins
  */
 .jumbotron {
-  margin-top: 100px
+  margin-top: 50px
 }
