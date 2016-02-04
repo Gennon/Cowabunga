@@ -15,10 +15,12 @@
   "homepage": "https://github.com/Gennon/Cowabunga#readme",
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "test": "mocha test/**/test*.js --compilers js:babel-core/register --recursive",
+    "test": "mocha",
     "coverage": "istanbul cover _mocha -- -R spec"
   },
   "devDependencies": {
+    "babel": "^6.3.26",
+    "babel-cli": "^6.4.5",
     "babel-core": "^6.2.1",
     "babel-loader": "^6.2.0",
     "babel-plugin-react-intl": "^2.0.0",
@@ -27,6 +29,7 @@
     "chai": "^3.4.1",
     "chai-spies": "^0.7.1",
     "eslint-plugin-react": "^3.16.1",
+    "isparta": "^4.0.0",
     "istanbul": "^0.4.2",
     "jsdom": "^7.2.2",
     "mocha": "^2.3.4",
