@@ -2,8 +2,8 @@ import { SHOW_PAGE } from '../actions/index';
 
 const INITIAL_STATE = { 
   items: [
-    { name: 'Home', active: true}, 
-    { name: 'Items', active: false}
+    { name: 'Home', active: true, link: '/home'}, 
+    { name: 'Items', active: false, link: '/items'}
   ],
   current: 0  
 };

@@ -48,7 +48,7 @@ describe('Testing Dashboard Component', function() {
   });
   
   it('should handle sidebar clicks', function() {
-    var item = TestUtils.scryRenderedDOMComponentsWithTag(this.rendered, 'li');
+    var item = TestUtils.scryRenderedDOMComponentsWithTag(this.rendered, 'a');
     assert.equal(item.length, 2);
     this.spy.should.not.have.been.called;
     TestUtils.Simulate.click(item[1]);

@@ -8,8 +8,8 @@ describe('Testing items reducer', () => {
     expect(reducer(undefined, {})).to.deep.equal(
       { 
         items: [
-          { name: 'Home', active: true}, 
-          { name: 'Items', active: false}
+          { name: 'Home', active: true, link: '/home'}, 
+          { name: 'Items', active: false, link: '/items'}
         ],
         current: 0 
       });
@@ -18,16 +18,16 @@ describe('Testing items reducer', () => {
   it('should handle SHOW_PAGE Home => Items', () => {
     const initialState = { 
       items: [
-        { name: 'Home', active: true}, 
-        { name: 'Items', active: false}
+        { name: 'Home', active: true, link: '/home'}, 
+        { name: 'Items', active: false, link: '/items'}
       ],
       current: 0 
     };
     
     const nextState = { 
       items: [
-        { name: 'Home', active: false}, 
-        { name: 'Items', active: true}
+        { name: 'Home', active: false, link: '/home'}, 
+        { name: 'Items', active: true, link: '/items'}
       ],
       current: 1 
     };
@@ -43,16 +43,16 @@ describe('Testing items reducer', () => {
   it('should handle SHOW_PAGE Items => Home', () => {
     const initialState = { 
       items: [
-        { name: 'Home', active: false}, 
-        { name: 'Items', active: true}
+        { name: 'Home', active: false, link: '/home'}, 
+        { name: 'Items', active: true, link: '/items'}
       ],
       current: 1 
     };
     
     const nextState = { 
       items: [
-        { name: 'Home', active: true}, 
-        { name: 'Items', active: false}
+        { name: 'Home', active: true, link: '/home'}, 
+        { name: 'Items', active: false, link: '/items'}
       ],
       current: 0 
     };

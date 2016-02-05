@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { Grid, Row, Col, PageHeader } from 'react-bootstrap';
+import { Link } from 'react-router';
 
 class Dashboard extends Component {  
   
   static defaultProps = {
-    items: [{ name: 'Home', active: true}, { name: 'Items', active: false}],
+    items: [{ name: 'Home', active: true, link: '/home'}, { name: 'Items', active: false, link: '/items'}],
     current: 0
   };
   
@@ -30,10 +31,9 @@ class Dashboard extends Component {
   renderSidebarItems(){
     return this.props.items.map((item, index) => {
       return (
-        <li onClick={() => this.props.handleSidebarClick(index)} 
-            className={item.active ? 'active' : ''} 
+        <li className={item.active ? 'active' : ''} 
             key={index}>
-          <a>{item.name}</a>
+          <Link to={item.link} onClick={() => this.props.handleSidebarClick(index)} >{item.name}</Link>
         </li>
       );
     });
