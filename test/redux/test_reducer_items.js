@@ -14,8 +14,8 @@ describe('Testing items reducer', () => {
     
     const nextState = { 
       all: [
-        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 },
-        { id: 2, created_by: 2, approved_by: 0, state: 2, type: 2 }
+        { id: 1, title: 'Test1', created_by: 1, approved_by: 0, state: 1 },
+        { id: 2, title: 'Test2', created_by: 2, approved_by: 0, state: 2 }
       ], 
       current: null
     };
@@ -23,8 +23,8 @@ describe('Testing items reducer', () => {
     const action = {
       type: actions.FETCH_ALL_ITEMS,
       payload: { data: [
-        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 },
-        { id: 2, created_by: 2, approved_by: 0, state: 2, type: 2 }
+        { id: 1, title: 'Test1', created_by: 1, approved_by: 0, state: 1 },
+        { id: 2, title: 'Test2', created_by: 2, approved_by: 0, state: 2 }
       ]}
     };
     
@@ -33,13 +33,13 @@ describe('Testing items reducer', () => {
   
   it('should handle FETCH_OWN_ITEMS', () => {
     const initialState = { all: [
-        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 },
-        { id: 2, created_by: 2, approved_by: 0, state: 2, type: 2 }
+        { id: 1, title: 'Test1', created_by: 1, approved_by: 0, state: 1 },
+        { id: 2, title: 'Test2', created_by: 2, approved_by: 0, state: 2 }
     ], current: null };
     
     const nextState = { 
       all: [
-        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 }
+        { id: 1, title: 'Test1', created_by: 1, approved_by: 0, state: 1 }
       ], 
       current: null
     };
@@ -47,7 +47,7 @@ describe('Testing items reducer', () => {
     const action = {
       type: actions.FETCH_OWN_ITEMS,
       payload: { data: [
-        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 }
+        { id: 1, title: 'Test1', created_by: 1, approved_by: 0, state: 1 }
       ]}
     };
     
@@ -57,22 +57,22 @@ describe('Testing items reducer', () => {
   
   it('should handle FETCH_ITEM', () => {
     const initialState = { all: [
-        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 },
-        { id: 2, created_by: 2, approved_by: 0, state: 2, type: 2 }
+        { id: 1, title: 'Test1', created_by: 1, approved_by: 0, state: 1 },
+        { id: 2, title: 'Test2', created_by: 2, approved_by: 0, state: 2 }
     ], current: null };
     
     const nextState = { 
       all: [
-        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 },
-        { id: 2, created_by: 2, approved_by: 0, state: 2, type: 2 }
+        { id: 1, title: 'Test1', created_by: 1, approved_by: 0, state: 1 },
+        { id: 2, title: 'Test2', created_by: 2, approved_by: 0, state: 2 }
       ], 
-      current: { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 }
+      current: { id: 1, title: 'Test1', created_by: 1, approved_by: 0, state: 1 }
     };
     
     const action = {
       type: actions.FETCH_ITEM,
       payload: { data: 
-        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 }
+        { id: 1, title: 'Test1', created_by: 1, approved_by: 0, state: 1 }
       }
     };
     
@@ -80,17 +80,17 @@ describe('Testing items reducer', () => {
   });
   
   it('should handle APPROVE_ITEM', () => {
-    const initialState = { all: [], current: { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 } };
+    const initialState = { all: [], current:{ id: 1, title: 'Test1', created_by: 1, approved_by: 0, state: 1 } };
     
     const nextState = { 
       all: [], 
-      current: { id: 1, created_by: 1, approved_by: 2, state: 2, type: 1 }
+      current: { id: 1, title: 'Test1', created_by: 1, approved_by: 2, state: 2 }
     };
     
     const action = {
       type: actions.APPROVE_ITEM,
       payload: { data: 
-        { id: 1, created_by: 1, approved_by: 2, state: 2, type: 1 }
+        { id: 1, title: 'Test1', created_by: 1, approved_by: 2, state: 2 }
       }
     };
     
@@ -102,13 +102,13 @@ describe('Testing items reducer', () => {
     
     const nextState = { 
       all: [], 
-      current: { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 }
+      current: { id: 1, title: 'Test1', created_by: 1, approved_by: 0, state: 1 }
     };
     
     const action = {
       type: actions.ORDER_ITEM,
       payload: { data: 
-        { id: 1, created_by: 1, approved_by: 0, state: 1, type: 1 }
+        { id: 1, title: 'Test1', created_by: 1, approved_by: 0, state: 1 }
       }
     };
     
