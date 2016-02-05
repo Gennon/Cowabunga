@@ -16,8 +16,24 @@ function init(db_file){
       'role INTEGER DEFAULT 0)', 
     (error) => {
       if(error) reject(error);
-      else fulfill(db);
     });
+    
+    database.run('CREATE TABLE IF NOT EXISTS items(' +
+      '_id INTEGER PRIMARY KEY AUTOINCREMENT, ' + 
+      'title TEXT, ' +
+      'created_by INTEGER, ' +
+      'approved_by INTEGER, ' +
+      'state INTEGER, ' +
+      'created_at DATETIME, ' +
+      'approved_at DATETIME, ' +
+      'produced_at DATETIME, ' +
+      'rejected_at DATETIME, ' +
+      'deleted_at DATETIME)',
+      error => {
+        if(error) reject(error);
+      });
+    
+    fulfill(db);
   });
 }
 
