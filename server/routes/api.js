@@ -57,7 +57,9 @@ router.get('/items', auth, function(req, res){
 });
 
 router.post('/items', auth, function(req, res){
-  console.log('body', req.body);
+  var body = req.body;
+  body.created_by = auth.user.id;
+  body.created_at = Date.now();
   router.db.addItem(req.body)
     .then(data => {
       res.json(data);
@@ -72,5 +74,37 @@ router.post('/items', auth, function(req, res){
     });
 });
 
+router.get('/users/:id/items', auth, function(req, res){
+  router.db.items({ created_by: req.params.id })
+    .then(data => {
+      res.json(data);
+    })
+    .catch(error => {
+      res.json({
+        error: {
+          message: error,
+          code: 200
+        }
+      });
+    });
+});
+
+router.post('/users/:id/items', auth, function(req, res){
+  var body = req.body;
+  body.created_by = req.params.id;
+  body.created_at = Date.now();
+  router.db.addItem(body)
+    .then(data => {
+      res.json(data);
+    })
+    .catch(error => {
+      res.json({
+        error: {
+          message: error,
+          code: 200
+        }
+      });
+    });
+});
 
 module.exports = router;
