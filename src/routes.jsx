@@ -5,7 +5,7 @@ import App from './components/app';
 import Greeting from './components/greeting';
 import Dashboard from './containers/dashboard';
 import Home from './components/home';
-import ItemsList from './components/items_list';
+import ItemsList from './containers/items_list';
 
 export default (
   <Route path="/" component={App}>

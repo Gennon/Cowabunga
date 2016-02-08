@@ -6,7 +6,11 @@ class ItemsList extends Component {
   static defaultProps = {
     items: []
   };
-    
+  
+  componentDidMount() {
+    this.props.fetchAllItems(this.props.user);
+  }
+  
   render() {
     if (this.props.items.length === 0)
       return this.renderEmptyList();
@@ -37,8 +41,8 @@ class ItemsList extends Component {
   renderItems(){
     return this.props.items.map(item => {
       return (
-        <tr>
-          <td>{item.id}</td>
+        <tr key={item._id}>
+          <td>{item._id}</td>
           <td>{item.title}</td>
           <td>{item.created_by}</td>
           <td>{item.state}</td>
@@ -50,11 +54,13 @@ class ItemsList extends Component {
 
 ItemsList.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    _id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    created_by: PropTypes.string.isRequired,
-    state: PropTypes.string.isRequired
-  }))
+    created_by: PropTypes.number.isRequired,
+    state: PropTypes.number.isRequired
+  })),
+  fetchAllItems: PropTypes.func,
+  user: PropTypes.object
 };
 
 export default ItemsList;

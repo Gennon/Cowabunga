@@ -21,7 +21,8 @@ var auth = function (req, res, next) {
         auth.user = {
           id: data[0]._id,
           username: data[0].username,
-          role: data[0].role
+          role: data[0].role,
+          password: data[0].password
         };
         return next();
       }
