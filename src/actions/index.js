@@ -28,7 +28,7 @@ export function logOut() {
 }
 
 export function orderItem(user,item) {
-  const request = axios.post(`${ROOT_URL}/users/${user.id}/items`, item);
+  const request = axios.post(`${ROOT_URL}/users/${user._id}/items`, item, { auth: user });
 
   return {
     type: ORDER_ITEM,
@@ -36,8 +36,8 @@ export function orderItem(user,item) {
   };
 }
 
-export function fetchItem(user,item_id) {
-  const request = axios.get(`${ROOT_URL}/users/${user.id}/items/${item_id}`);
+export function fetchItem(user,item) {
+  const request = axios.get(`${ROOT_URL}/users/${user._id}/items/${item._id}`, { auth: user });
 
   return {
     type: FETCH_ITEM,
@@ -45,8 +45,8 @@ export function fetchItem(user,item_id) {
   };
 }
 
-export function fetchAllItems() {
-  const request = axios.get(`${ROOT_URL}/items`);
+export function fetchAllItems(user) {
+  const request = axios.get(`${ROOT_URL}/items`, { auth: user });
 
   return {
     type: FETCH_ALL_ITEMS,
@@ -54,8 +54,8 @@ export function fetchAllItems() {
   };
 }
 
-export function fetchOwnItems(user_id) {
-  const request = axios.get(`${ROOT_URL}/users/${user_id}/items`);
+export function fetchOwnItems(user) {
+  const request = axios.get(`${ROOT_URL}/users/${user._id}/items`, { auth: user });
 
   return {
     type: FETCH_OWN_ITEMS,
@@ -63,8 +63,8 @@ export function fetchOwnItems(user_id) {
   };
 }
 
-export function approveItem(user_id, item) {
-  const request = axios.put(`${ROOT_URL}/users/${user_id}/items/${item.id}`, item);
+export function approveItem(user, item) {
+  const request = axios.post(`${ROOT_URL}/items/${item.id}/approve`, null, { auth: user });
 
   return {
     type: APPROVE_ITEM,

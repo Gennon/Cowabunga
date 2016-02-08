@@ -73,12 +73,7 @@ router.get('/items', auth, function(req, res){
       res.json(data);
     })
     .catch(error => {
-      res.json({
-        error: {
-          message: error,
-          code: 200
-        }
-      });
+      res.status(500).json(fail(error, 500));
     });
 });
 
@@ -91,12 +86,7 @@ router.post('/items', auth, function(req, res){
       res.json(data);
     })
     .catch(error => {
-      res.json({
-        error: {
-          message: error,
-          code: 200
-        }
-      });
+      res.status(500).json(fail(error, 500));
     });
 });
 
@@ -106,12 +96,20 @@ router.get('/users/:id/items', auth, function(req, res){
       res.json(data);
     })
     .catch(error => {
-      res.json({
-        error: {
-          message: error,
-          code: 200
-        }
-      });
+      res.json(fail(error, 200));
+    });
+});
+
+router.get('/users/:user/items/:id', auth, function(req, res){
+  router.db.items({ _id: req.params.id, created_by: req.params.user })
+    .then(data => {
+      if(data.length === 1)
+        res.json(data[0]);
+      else
+        res.status(404).json(fail('No content', 404));
+    })
+    .catch(error => {
+      res.status(500).json(fail(error, 500));
     });
 });
 
@@ -124,12 +122,7 @@ router.post('/users/:id/items', auth, function(req, res){
       res.json(data);
     })
     .catch(error => {
-      res.json({
-        error: {
-          message: error,
-          code: 200
-        }
-      });
+      res.json(fail(error, 200));
     });
 });
 
@@ -141,12 +134,7 @@ router.put('/users/:user/items/:id', auth, function(req, res){
       res.json(data);
     })
     .catch(error => {
-      res.json({
-        error: {
-          message: error,
-          code: 200
-        }
-      });
+      res.status(500).json(fail(error, 500));
     });
 });
 
@@ -199,13 +187,15 @@ function update(body, res){
       res.json(data);
     })
     .catch(error => {
-      res.json({
-        error: {
-          message: error,
-          code: 200
-        }
-      });
+      res.status(500).json(fail(error, 500));
     });
+}
+
+function fail(message, code){
+  return { error: {
+    message: message,
+    code: code
+  }};
 }
 
 module.exports = router;
