@@ -38,40 +38,62 @@ function init(db_file){
 }
 
 function users(where){
+  return get('users', where);
+}
+
+function items(where){
+  return get('items', where);
+}
+
+function get(table, where){
   return new Promise(function(fulfill, reject){
-    if(!database) return reject([]);
+    testDB(reject);
     var select = {
-      table: 'users'
+      table: table
     };
     if (typeof(where) !=='undefined'){
       select.where = where;
     }
     
-    db.select(select, function(err, users) {
-      if (err) reject([]);
-      return fulfill(users || []);
+    db.select(select, function(error, result) {
+      if (error) reject(new Error(error));
+      return fulfill(result || []);
     });
   });
 }
 
 function addUser(user){
+  return add('users', user);
+}
+
+function addItem(item){
+  return add('items', item);
+}
+
+function add(table, object){
   return new Promise(function(fulfill, reject){
-    if(!db) return reject({});
+    testDB(reject);
     
-    db.insert('users', user, function(error, id) {
+    db.insert(table, object, function(error, id) {
       if(id > 0){
-        user.id = id;
-        return fulfill(user);
+        object.id = id;
+        return fulfill(object);
       }
-      return reject({});
+      return reject(new Error(error));
     });
   });
 }
 
 
+function testDB(reject){
+  if(!db || !database) return reject(new Error('No database'));
+}
+
 module.exports = {
   init: init,
   users: users,
   addUser: addUser,
+  items: items,
+  addItem: addItem,
   close: db.close
 };

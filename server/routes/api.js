@@ -41,4 +41,36 @@ router.post('/login', auth, function(req, res) {
   res.json(auth.user);
 });
 
+router.get('/items', auth, function(req, res){
+  router.db.items()
+    .then(data => {
+      res.json(data);
+    })
+    .catch(error => {
+      res.json({
+        error: {
+          message: error,
+          code: 200
+        }
+      });
+    });
+});
+
+router.post('/items', auth, function(req, res){
+  console.log('body', req.body);
+  router.db.addItem(req.body)
+    .then(data => {
+      res.json(data);
+    })
+    .catch(error => {
+      res.json({
+        error: {
+          message: error,
+          code: 200
+        }
+      });
+    });
+});
+
+
 module.exports = router;

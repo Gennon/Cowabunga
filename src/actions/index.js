@@ -27,8 +27,8 @@ export function logOut() {
   };
 }
 
-export function orderItem(user_id,item) {
-  const request = axios.post(`${ROOT_URL}/users/${user_id}/items`, item);
+export function orderItem(user,item) {
+  const request = axios.post(`${ROOT_URL}/users/${user.id}/items`, item);
 
   return {
     type: ORDER_ITEM,
@@ -36,8 +36,8 @@ export function orderItem(user_id,item) {
   };
 }
 
-export function fetchItem(user_id,item_id) {
-  const request = axios.get(`${ROOT_URL}/users/${user_id}/items/${item_id}`);
+export function fetchItem(user,item_id) {
+  const request = axios.get(`${ROOT_URL}/users/${user.id}/items/${item_id}`);
 
   return {
     type: FETCH_ITEM,
