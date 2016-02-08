@@ -107,4 +107,38 @@ router.post('/users/:id/items', auth, function(req, res){
     });
 });
 
+router.put('/users/:user/items/:id', auth, function(req, res){
+  var body = req.body;
+  body._id = req.params.id;
+  router.db.updateItem(body)
+    .then(data => {
+      res.json(data);
+    })
+    .catch(error => {
+      res.json({
+        error: {
+          message: error,
+          code: 200
+        }
+      });
+    });
+});
+
+router.put('/items/:id', auth, function(req, res){
+  var body = req.body;
+  body._id = req.params.id;
+  router.db.updateItem(body)
+    .then(data => {
+      res.json(data);
+    })
+    .catch(error => {
+      res.json({
+        error: {
+          message: error,
+          code: 200
+        }
+      });
+    });
+});
+
 module.exports = router;

@@ -45,6 +45,13 @@ function items(where){
   return get('items', where);
 }
 
+function item(id){
+  return get('items', {_id: id})
+  .then(data => {
+    return data[0];
+  });
+}
+
 function get(table, where){
   return new Promise(function(fulfill, reject){
     testDB(reject);
@@ -76,9 +83,27 @@ function add(table, object){
     
     db.insert(table, object, function(error, id) {
       if(id > 0){
-        object.id = id;
-        return fulfill(object);
+        var addedObject = item(id);
+        return fulfill(addedObject);
       }
+      return reject(new Error(error));
+    });
+  });
+}
+
+function updateItem(object){
+  return update('items', object);
+}
+
+function update(table, object){
+  return new Promise(function(fulfill, reject){
+    testDB(reject);
+    var where = {_id : object._id };
+    db.update(table, where, object, function(error, changes) {
+      if(changes > 0){
+        var updatedObject = item(object._id);
+        return fulfill(updatedObject);
+      } 
       return reject(new Error(error));
     });
   });
@@ -95,5 +120,6 @@ module.exports = {
   addUser: addUser,
   items: items,
   addItem: addItem,
+  updateItem: updateItem,
   close: db.close
 };
