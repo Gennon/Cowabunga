@@ -29,6 +29,32 @@ var auth = function (req, res, next) {
     });
 };
 
+var auth_role = function(req, res, next){
+  function unauthorized(res) {
+    res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+    return res.sendStatus(401);
+  }
+
+  var user = basicAuth(req);
+
+  if (!user || !user.name || !user.pass) {
+    return unauthorized(res);
+  }
+
+  router.db.users({username: user.name, password: user.pass})
+    .then((data) => {
+      if(data.length === 1 && data[0].role === 1){
+        auth_role.user = {
+          id: data[0]._id,
+          username: data[0].username,
+          role: data[0].role
+        };
+        return next();
+      }
+      return unauthorized(res);
+    });
+};
+
 
 router.db = null;
 
@@ -124,9 +150,50 @@ router.put('/users/:user/items/:id', auth, function(req, res){
     });
 });
 
-router.put('/items/:id', auth, function(req, res){
+router.put('/items/:id', auth_role, function(req, res){
   var body = req.body;
   body._id = req.params.id;
+  body.updated_by = auth_role.user.id;
+  update(body, res);
+});
+
+router.post('/items/:id/approve', auth_role, function(req, res){
+  var body = req.body;
+  body._id = req.params.id;
+  body.updated_by = auth_role.user.id;
+  body.approved_at = Date.now();
+  body.state = 2;
+  update(body, res);
+});
+
+router.post('/items/:id/produce', auth_role, function(req, res){
+  var body = req.body;
+  body._id = req.params.id;
+  body.updated_by = auth_role.user.id;
+  body.produced_at = Date.now();
+  body.state = 3;
+  update(body, res);
+});
+
+router.post('/items/:id/reject', auth_role, function(req, res){
+  var body = req.body;
+  body._id = req.params.id;
+  body.updated_by = auth_role.user.id;
+  body.rejected_at = Date.now();
+  body.state = 4;
+  update(body, res);
+});
+
+router.post('/items/:id/delete', auth, function(req, res){
+  var body = req.body;
+  body._id = req.params.id;
+  body.updated_by = auth.user.id;
+  body.deleted_at = Date.now();
+  body.state = 5;
+  update(body, res);
+});
+
+function update(body, res){
   router.db.updateItem(body)
     .then(data => {
       res.json(data);
@@ -139,6 +206,6 @@ router.put('/items/:id', auth, function(req, res){
         }
       });
     });
-});
+}
 
 module.exports = router;

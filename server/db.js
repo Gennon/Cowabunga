@@ -22,7 +22,7 @@ function init(db_file){
       '_id INTEGER PRIMARY KEY AUTOINCREMENT, ' + 
       'title TEXT, ' +
       'created_by INTEGER, ' +
-      'approved_by INTEGER, ' +
+      'updated_by INTEGER, ' +
       'state INTEGER, ' +
       'created_at DATETIME, ' +
       'approved_at DATETIME, ' +
